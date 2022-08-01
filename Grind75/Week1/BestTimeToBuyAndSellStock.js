@@ -14,20 +14,19 @@
 // Output: 0
 // Explanation: In this case, no transactions are done and the max profit = 0.
 
-
 /**
  * @param {number[]} prices
  * @return {number}
  */
- var maxProfit = function(prices) {
-    let buy = prices[0];
-    let max = 0;
-    for (let i=1; i<prices.length; i++) {
-        if (prices[i] < buy) buy = prices[i];
-        max = Math.max(prices[i]-buy, max)
-    }
-    return max;
+var maxProfit = function (prices) {
+  let buy = prices[0];
+  let max = 0;
+  for (let i = 1; i < prices.length; i++) {
+    if (prices[i] < buy) buy = prices[i];
+    max = Math.max(prices[i] - buy, max);
+  }
+  return max;
 };
 
-//TC: O(n) 
+//TC: O(n)
 //SC: O(1)
