@@ -76,7 +76,7 @@ var updateMatrix = function (mat) {
   while (queue.length) {
     const [row, col, path] = queue.shift();
 
-    // mat[row][col] = Math.min(mat[row][col], path);
+    mat[row][col] = Math.min(mat[row][col], path);
     for (const [dx, dy] of directions) {
       const x = row + dx;
       const y = col + dy;
