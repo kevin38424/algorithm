@@ -36,7 +36,6 @@ var kClosest = function (points, k) {
   }
 
   const distArr = [...map.keys()].sort((a, b) => map.get(a) - map.get(b));
-
   return distArr.slice(0, k);
 };
 
