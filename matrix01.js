@@ -24,31 +24,72 @@
  * @param {number[][]} mat
  * @return {number[][]}
  */
+// var updateMatrix = function (mat) {
+//   let row = mat.length;
+//   let col = mat[0].length;
+//   const result = [];
+
+//   for (let i = 0; i < row; i++) {
+//     const finalRow = [];
+//     for (let j = 0; j < col; j++) {
+//       finalRow.push(update(mat, i, j));
+//     }
+//     result.push(finalRow);
+//   }
+
+//   function update(matrix, r, c, dist = 0) {
+//     if (matrix[r][c] === 0) {
+//       return dist;
+//     }
+
+//     if (r > 0) return update(matrix, r - 1, c, ++dist);
+//     if (c < matrix[0].length) return update(matrix, r, c + 1, ++dist);
+//     if (c > 0) return update(matrix, r, c - 1, ++dist);
+//     if (r < matrix.length) return update(matrix, r + 1, c, ++dist);
+//   }
+
+//   return result;
+// };
+
 var updateMatrix = function (mat) {
   let row = mat.length;
   let col = mat[0].length;
-  const result = [];
+  const queue = [];
 
   for (let i = 0; i < row; i++) {
-    const finalRow = [];
     for (let j = 0; j < col; j++) {
-      finalRow.push(update(mat, i, j));
+      if (mat[i][j] === 0) {
+        queue.push([i, j, 0]);
+      } else {
+        mat[i][j] = Infinity;
+      }
     }
-    result.push(finalRow);
   }
 
-  function update(matrix, r, c, dist = 0) {
-    if (matrix[r][c] === 0) {
-      return dist;
-    }
+  const directions = [
+    [-1, 0],
+    [1, 0],
+    [0, -1],
+    [0, 1],
+  ];
 
-    if (r > 0) return update(matrix, r - 1, c, ++dist);
-    if (c < matrix[0].length) return update(matrix, r, c + 1, ++dist);
-    if (c > 0) return update(matrix, r, c - 1, ++dist);
-    if (r < matrix.length) return update(matrix, r + 1, c, ++dist);
+  while (queue.length) {
+    const [row, col, path] = queue.shift();
+
+    // mat[row][col] = Math.min(mat[row][col], path);
+    for (const [dx, dy] of directions) {
+      const x = row + dx;
+      const y = col + dy;
+
+      if (x < 0 || x >= mat.length) continue;
+      if (y < 0 || y >= mat[0].length) continue;
+      if (mat[x][y] !== Infinity) continue;
+
+      queue.push([x, y, path + 1]);
+    }
   }
 
-  return result;
+  return mat;
 };
 
 console.log(
@@ -61,8 +102,10 @@ console.log(
 
 console.table(
   updateMatrix([
-    [1, 1, 0],
-    [1, 1, 1],
-    [1, 1, 1],
+    [0, 1, 0],
+    [0, 1, 0],
+    [0, 1, 0],
+    [0, 1, 0],
+    [0, 1, 0],
   ])
 );
