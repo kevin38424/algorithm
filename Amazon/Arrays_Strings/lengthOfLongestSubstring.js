@@ -28,10 +28,7 @@ function lengthOfLongestSubstring(str) {
     if (map.has(str[i])) start = Math.max(map.get(str[i]) + 1, start);
     map.set(str[i], i);
     maxLength = Math.max(maxLength, i - start + 1);
-    console.log(map);
-    console.log(start);
   }
-
   return maxLength;
 }
 
