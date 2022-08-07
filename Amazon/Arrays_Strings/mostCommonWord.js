@@ -31,7 +31,6 @@ And the + means continue adding characters to the match as long as they are they
 
 function mostCommonWord(paragraph, banned) {
   const paraArr = paragraph.replace(/[^a-zA-Z ]/g, " ").split(" ");
-  console.log(paraArr);
   const bannedObj = {};
   for (let ele of banned) {
     if (ele === "") continue;

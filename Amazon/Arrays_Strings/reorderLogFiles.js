@@ -43,14 +43,17 @@ var reorderLogFiles = function (logs) {
   return [...letterLogs.sort(compare), ...digitLogs];
 };
 
+//첫 제목 뒤 나머지들 구축하기
 function body(log) {
   return log.slice(log.indexOf(" ") + 1);
 }
 
+//숫자인지 체크
 function isNum(log) {
   return /[0-9]/.test(log);
 }
 
+//localeCompare는 앞 엘리먼트와 뒤 엘리먼트 순위를 비교함. 같을시에는 0을 리턴하는데, 그럴경우 제목으로 순서를 정해줌.
 function compare(a, b) {
   const n = body(a).localeCompare(body(b));
   if (n !== 0) return n;
